@@ -1,11 +1,10 @@
 # Phase 1: Hindi and English Audio-to-Text Dependencies
 # Free and open-source packages only (no paid APIs).
-# Intended for installation inside Google Colab or a dedicated Python environment.
+# Intended for installation inside Google Colab from phase1_voice/requirements.txt.
 
 numpy>=1.24.0
 soundfile>=0.12.1
 librosa>=0.10.1
 faster-whisper>=1.0.3
 transformers>=4.40.0
-accelerate>=0.30.0
 torch>=2.1.0
