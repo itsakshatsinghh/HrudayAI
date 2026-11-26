@@ -24,10 +24,13 @@ from phase1_voice.src.audio_utils import (
     validate_audio_path,
 )
 from phase1_voice.src.transcription import (
+    _MODEL_CACHE,
     TranscriptionError,
     UnsupportedLanguageError,
+    clear_model_cache,
     get_model_config,
     list_available_models,
+    load_asr_model,
     transcribe_audio,
 )
 
@@ -134,6 +137,23 @@ class Phase1AudioAndTranscriptionTests(unittest.TestCase):
         self.assertTrue(result["target_language_supported"])
         self.assertEqual(result["text"], "mujhe kal se bukhar hai")
         self.assertEqual(result["model_key"], "faster_whisper_small")
+
+    def test_load_asr_model_uses_runtime_cache(self) -> None:
+        clear_model_cache()
+        cfg = get_model_config("faster_whisper_small")
+        sentinel = {
+            "config": cfg,
+            "backend": "custom_callable",
+            "device": "cpu",
+            "compute_type": "int8",
+            "model": object(),
+        }
+        _MODEL_CACHE[("faster_whisper_small", "cpu")] = sentinel
+        try:
+            loaded = load_asr_model(model_key="faster_whisper_small", device="cpu")
+            self.assertIs(loaded, sentinel)
+        finally:
+            clear_model_cache()
 
 
 if __name__ == "__main__":

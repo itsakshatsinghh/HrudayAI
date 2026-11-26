@@ -56,6 +56,14 @@ class UnsupportedLanguageError(TranscriptionError):
     """Raised when a caller requests a language outside Phase 1 scope (hi, en)."""
 
 
+_MODEL_CACHE: dict[tuple[str, str], dict[str, Any]] = {}
+
+
+def clear_model_cache() -> None:
+    """Clear the in-memory loaded ASR model cache."""
+    _MODEL_CACHE.clear()
+
+
 @dataclass(frozen=True)
 class ASRModelConfig:
     """Configuration metadata for an open-source ASR model candidate."""
@@ -128,10 +136,15 @@ def load_asr_model(
     model_key: str = "faster_whisper_small",
     device: str = "auto",
     config_path: Path | None = None,
+    force_reload: bool = False,
 ) -> dict[str, Any]:
-    """Load an open-source ASR model bundle for Phase 1 inference (intended for Colab)."""
+    """Load and cache an open-source ASR model bundle for Phase 1 inference."""
     config = get_model_config(model_key, config_path=config_path)
     resolved_device, compute_type = resolve_device(device)
+    cache_key = (config.key, resolved_device)
+
+    if not force_reload and cache_key in _MODEL_CACHE:
+        return _MODEL_CACHE[cache_key]
 
     if config.backend == "faster_whisper":
         if importlib.util.find_spec("faster_whisper") is None:
@@ -151,13 +164,15 @@ def load_asr_model(
                 f"Failed to load faster-whisper model '{config.model_id}': {exc}"
             ) from exc
 
-        return {
+        bundle = {
             "config": config,
             "backend": config.backend,
             "device": resolved_device,
             "compute_type": compute_type,
             "model": model,
         }
+        _MODEL_CACHE[cache_key] = bundle
+        return bundle
 
     if config.backend == "transformers_whisper":
         if importlib.util.find_spec("transformers") is None or importlib.util.find_spec("torch") is None:
@@ -181,13 +196,15 @@ def load_asr_model(
                 f"Failed to load transformers ASR model '{config.model_id}': {exc}"
             ) from exc
 
-        return {
+        bundle = {
             "config": config,
             "backend": config.backend,
             "device": resolved_device,
             "compute_type": str(torch_dtype),
             "model": asr_pipe,
         }
+        _MODEL_CACHE[cache_key] = bundle
+        return bundle
 
     raise TranscriptionError(f"Unsupported ASR backend '{config.backend}' for model '{model_key}'.")
 
@@ -216,25 +233,33 @@ def _transcribe_faster_whisper(
     language_hint: str | None,
 ) -> dict[str, Any]:
     model = model_bundle["model"]
-    transcribe_kwargs: dict[str, Any] = {
-        "beam_size": 5,
-        "task": "transcribe",
-        "vad_filter": True,
-    }
-    if language_hint is not None:
-        transcribe_kwargs["language"] = language_hint
 
-    segments_iter, info = model.transcribe(waveform, **transcribe_kwargs)
-    segments = [
-        {
-            "start": round(float(seg.start), 2),
-            "end": round(float(seg.end), 2),
-            "text": seg.text.strip(),
+    def _run(use_vad: bool):
+        transcribe_kwargs: dict[str, Any] = {
+            "beam_size": 5,
+            "task": "transcribe",
+            "vad_filter": use_vad,
         }
-        for seg in segments_iter
-        if seg.text and seg.text.strip()
-    ]
-    full_text = " ".join(seg["text"] for seg in segments).strip()
+        if language_hint is not None:
+            transcribe_kwargs["language"] = language_hint
+        segments_iter, info = model.transcribe(waveform, **transcribe_kwargs)
+        segments = [
+            {
+                "start": round(float(seg.start), 2),
+                "end": round(float(seg.end), 2),
+                "text": seg.text.strip(),
+            }
+            for seg in segments_iter
+            if seg.text and seg.text.strip()
+        ]
+        full_text = " ".join(seg["text"] for seg in segments).strip()
+        return full_text, segments, info
+
+    full_text, segments, info = _run(use_vad=True)
+    # Retry without VAD if aggressive silence filtering removed quiet speech
+    if not full_text:
+        full_text, segments, info = _run(use_vad=False)
+
     detected_lang = str(getattr(info, "language", None) or language_hint or "unknown").lower()
     lang_prob = getattr(info, "language_probability", None)
     return {
@@ -258,6 +283,7 @@ def _transcribe_transformers_whisper(
 
     output = asr_pipe(
         {"array": waveform, "sampling_rate": sample_rate},
+        return_timestamps=True,
         generate_kwargs=generate_kwargs,
     )
     text = str(output.get("text", "")).strip()
