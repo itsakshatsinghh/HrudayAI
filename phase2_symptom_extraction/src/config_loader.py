@@ -44,4 +44,7 @@ def load_extraction_rules(rules_path: str | Path | None = None) -> dict[str, Any
     for required_key in ("matching", "negation", "severity"):
         if required_key not in data or not isinstance(data[required_key], dict):
             raise ExtractionConfigError(f"Rules file {path} is missing '{required_key}' section.")
+    for optional_key in ("temporal", "uncertainty", "ellipsis"):
+        if optional_key in data and not isinstance(data[optional_key], dict):
+            raise ExtractionConfigError(f"Rules file {path} section '{optional_key}' must be an object.")
     return data
