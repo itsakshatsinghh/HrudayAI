@@ -1,0 +1,5 @@
+# Phase 2 Symptom Extraction Dependencies
+# Free, open-source, locally executable, CPU-compatible (no paid APIs).
+# License: rapidfuzz is MIT-licensed.
+
+rapidfuzz>=3.6.0

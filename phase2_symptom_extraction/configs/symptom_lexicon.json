@@ -1,0 +1,142 @@
+{
+  "version": "1.0.0",
+  "supported_languages": ["hi", "en"],
+  "symptoms": {
+    "fever": {
+      "en": ["fever", "fevers", "high temperature", "pyrexia", "temperature", "febrile"],
+      "hi": ["बुखार", "बुकार", "ज्वर", "ताप", "बदन गरम", "शरीर गरम"]
+    },
+    "headache": {
+      "en": ["headache", "headaches", "head ache", "head pain", "pain in head", "migraine"],
+      "hi": ["सिर में दर्द", "सिर दर्द", "सिरदर्द", "सर में दर्द", "सर दर्द", "सरदर्द", "माथे में दर्द"]
+    },
+    "weakness": {
+      "en": ["weakness", "weaknesses", "feeling weak", "weak", "debility", "lack of strength"],
+      "hi": ["कमजोरी", "कमज़ोरी", "दुर्बलता", "ताकत की कमी"]
+    },
+    "fatigue": {
+      "en": ["fatigue", "tiredness", "tired", "exhaustion", "exhausted", "lethargy"],
+      "hi": ["थकान", "थकावट", "सुस्ती", "आलस्य"]
+    },
+    "cough": {
+      "en": ["cough", "coughing", "dry cough", "wet cough", "productive cough"],
+      "hi": ["खांसी", "खाँसी", "खांसि", "सूखी खांसी", "बलगम वाली खांसी", "कफ"]
+    },
+    "sore_throat": {
+      "en": ["sore throat", "throat pain", "throat irritation", "pain in throat", "scratchy throat"],
+      "hi": ["गले में दर्द", "गले में खराश", "गला खराब", "गला दर्द", "गले की खराश"]
+    },
+    "runny_nose": {
+      "en": ["runny nose", "running nose", "nasal discharge", "cold", "common cold", "stuffy nose", "nasal congestion"],
+      "hi": ["नाक बहना", "बहती नाक", "जुकाम", "जुखाम", "सर्दी", "नाक बंद"]
+    },
+    "sneezing": {
+      "en": ["sneezing", "sneeze", "continuous sneezing"],
+      "hi": ["छींक", "छींकें", "छींक आना", "बार बार छींक"]
+    },
+    "chest_pain": {
+      "en": ["chest pain", "pain in chest", "chest tightness", "chest discomfort"],
+      "hi": ["सीने में दर्द", "छाती में दर्द", "सीने दर्द", "छाती दर्द", "सीने में जकड़न"]
+    },
+    "shortness_of_breath": {
+      "en": ["shortness of breath", "breathlessness", "difficulty breathing", "trouble breathing", "hard to breathe", "dyspnea"],
+      "hi": ["सांस फूलना", "साँस फूलना", "सांस लेने में तकलीफ", "साँस लेने में तकलीफ", "सांस लेने में दिक्कत", "दम घुटना"]
+    },
+    "wheezing": {
+      "en": ["wheezing", "wheeze"],
+      "hi": ["सांस में घरघराहट", "सीने में घरघराहट"]
+    },
+    "nausea": {
+      "en": ["nausea", "nauseous", "feeling sick", "queasy", "urge to vomit"],
+      "hi": ["जी मिचलाना", "मतली", "उल्टी जैसा लगना", "उलटी जैसा लगना", "मन खराब"]
+    },
+    "vomiting": {
+      "en": ["vomiting", "vomit", "vomited", "throwing up", "emesis"],
+      "hi": ["उल्टी", "उलटी", "उल्टियां", "उलटियाँ", "कै"]
+    },
+    "diarrhea": {
+      "en": ["diarrhea", "diarrhoea", "loose motions", "loose motion", "watery stool", "loose stool"],
+      "hi": ["दस्त", "लूज मोशन", "पतले दस्त", "पेचिश"]
+    },
+    "abdominal_pain": {
+      "en": ["abdominal pain", "stomach pain", "stomach ache", "stomachache", "belly pain", "tummy ache", "pain in abdomen"],
+      "hi": ["पेट में दर्द", "पेट दर्द", "पेट मरोड़", "पेट में मरोड़", "पेट ऐंठन"]
+    },
+    "acidity": {
+      "en": ["acidity", "heartburn", "acid reflux", "indigestion", "bloating", "gas"],
+      "hi": ["एसिडिटी", "सीने में जलन", "पेट में जलन", "बदहजमी", "अपच", "पेट में गैस", "गैस"]
+    },
+    "constipation": {
+      "en": ["constipation", "hard stool", "difficulty passing stool"],
+      "hi": ["कब्ज", "कब्ज़", "पेट साफ न होना"]
+    },
+    "loss_of_appetite": {
+      "en": ["loss of appetite", "poor appetite", "no appetite", "not feeling hungry", "anorexia"],
+      "hi": ["भूख न लगना", "भूख कम लगना", "भूख नहीं लगना", "भूख की कमी"]
+    },
+    "dizziness": {
+      "en": ["dizziness", "dizzy", "vertigo", "lightheadedness", "lightheaded", "spinning head"],
+      "hi": ["चक्कर", "चक्कर आना", "सिर घूमना", "सर घूमना"]
+    },
+    "body_ache": {
+      "en": ["body ache", "body pain", "bodyache", "muscle pain", "muscle ache", "myalgia", "aches"],
+      "hi": ["बदन दर्द", "बदन में दर्द", "शरीर में दर्द", "शरीर दर्द", "मांसपेशियों में दर्द", "हाथ पैर दर्द"]
+    },
+    "joint_pain": {
+      "en": ["joint pain", "pain in joints", "joint ache", "arthralgia", "knee pain"],
+      "hi": ["जोड़ों में दर्द", "जोड़ों का दर्द", "घुटनों में दर्द", "घुटने में दर्द"]
+    },
+    "back_pain": {
+      "en": ["back pain", "backache", "lower back pain", "pain in back"],
+      "hi": ["कमर दर्द", "कमर में दर्द", "पीठ दर्द", "पीठ में दर्द"]
+    },
+    "chills": {
+      "en": ["chills", "shivering", "rigors", "feeling cold"],
+      "hi": ["ठंड लगना", "कंपकंपी", "कंपकपी", "कपकपी", "जाड़ा लगना"]
+    },
+    "sweating": {
+      "en": ["sweating", "excessive sweating", "sweats", "night sweats", "perspiration"],
+      "hi": ["पसीना", "पसीना आना", "अधिक पसीना", "रात में पसीना"]
+    },
+    "skin_rash": {
+      "en": ["skin rash", "rash", "rashes", "red spots", "hives", "skin eruption"],
+      "hi": ["दाने", "लाल दाने", "चमड़ी पर दाने", "रैश", "चकत्ते"]
+    },
+    "itching": {
+      "en": ["itching", "itchiness", "itchy skin", "pruritus"],
+      "hi": ["खुजली", "खारिश"]
+    },
+    "burning_urination": {
+      "en": ["burning urination", "burning micturition", "painful urination", "burning while urinating"],
+      "hi": ["पेशाब में जलन", "पेशाब करते समय जलन", "मूत्र में जलन"]
+    },
+    "frequent_urination": {
+      "en": ["frequent urination", "urinating often", "polyuria"],
+      "hi": ["बार बार पेशाब आना", "अधिक पेशाब आना"]
+    },
+    "blurred_vision": {
+      "en": ["blurred vision", "blurry vision", "dim vision", "vision problem"],
+      "hi": ["धुंधला दिखना", "धुंधलापन", "कम दिखाई देना"]
+    },
+    "palpitations": {
+      "en": ["palpitations", "fast heartbeat", "racing heart", "heart pounding"],
+      "hi": ["दिल की धड़कन तेज", "धड़कन तेज", "घबराहट"]
+    },
+    "loss_of_smell": {
+      "en": ["loss of smell", "cannot smell", "anosmia"],
+      "hi": ["सूंघने की शक्ति कम", "गंध न आना", "खुशबू न आना"]
+    },
+    "loss_of_taste": {
+      "en": ["loss of taste", "cannot taste", "ageusia"],
+      "hi": ["स्वाद न आना", "स्वाद की कमी"]
+    },
+    "swelling": {
+      "en": ["swelling", "swollen legs", "swollen feet", "edema"],
+      "hi": ["सूजन", "पैरों में सूजन", "हाथ पैरों में सूजन"]
+    },
+    "anxiety": {
+      "en": ["anxiety", "restlessness", "nervousness"],
+      "hi": ["चिंता", "बेचैनी"]
+    }
+  }
+}
