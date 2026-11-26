@@ -1,0 +1,44 @@
+{
+  "default_model": "faster_whisper_small",
+  "target_languages": {
+    "hi": "Hindi",
+    "en": "English"
+  },
+  "models": {
+    "faster_whisper_base": {
+      "backend": "faster_whisper",
+      "model_id": "base",
+      "display_name": "Whisper Base (faster-whisper)",
+      "supported_languages": ["hi", "en"],
+      "notes": "Fastest lightweight baseline; runs comfortably on CPU and Colab T4 GPU."
+    },
+    "faster_whisper_small": {
+      "backend": "faster_whisper",
+      "model_id": "small",
+      "display_name": "Whisper Small (faster-whisper)",
+      "supported_languages": ["hi", "en"],
+      "notes": "Recommended Phase 1 starting point balancing Hindi/English accuracy and Colab speed."
+    },
+    "faster_whisper_medium": {
+      "backend": "faster_whisper",
+      "model_id": "medium",
+      "display_name": "Whisper Medium (faster-whisper)",
+      "supported_languages": ["hi", "en"],
+      "notes": "Higher Hindi recognition accuracy; recommended with Google Colab T4 GPU."
+    },
+    "hf_whisper_small": {
+      "backend": "transformers_whisper",
+      "model_id": "openai/whisper-small",
+      "display_name": "OpenAI Whisper Small (Transformers)",
+      "supported_languages": ["hi", "en"],
+      "notes": "Hugging Face Transformers pipeline baseline for cross-backend comparison."
+    },
+    "hf_whisper_hindi_small": {
+      "backend": "transformers_whisper",
+      "model_id": "vasista22/whisper-hindi-small",
+      "display_name": "Whisper Hindi Small (Transformers)",
+      "supported_languages": ["hi"],
+      "notes": "Community open-source Hindi fine-tuned checkpoint for Hindi-only benchmark comparison."
+    }
+  }
+}
