@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "description": "Explicit, non-guessing mapping from Phase 2.5 canonical symptoms to MedPredict 131 XGBoost features.",
+  "direct_mappings": {
+    "headache": "headache",
+    "fatigue": "fatigue",
+    "cough": "cough",
+    "runny_nose": "runny_nose",
+    "chest_pain": "chest_pain",
+    "nausea": "nausea",
+    "vomiting": "vomiting",
+    "abdominal_pain": "abdominal_pain",
+    "acidity": "acidity",
+    "constipation": "constipation",
+    "loss_of_appetite": "loss_of_appetite",
+    "dizziness": "dizziness",
+    "joint_pain": "joint_pain",
+    "back_pain": "back_pain",
+    "chills": "chills",
+    "sweating": "sweating",
+    "skin_rash": "skin_rash",
+    "itching": "itching",
+    "palpitations": "palpitations",
+    "loss_of_smell": "loss_of_smell",
+    "anxiety": "anxiety",
+    "diarrhea": "diarrhoea",
+    "sore_throat": "throat_irritation",
+    "sneezing": "continuous_sneezing",
+    "shortness_of_breath": "breathlessness",
+    "body_ache": "muscle_pain",
+    "burning_urination": "burning_micturition",
+    "blurred_vision": "blurred_and_distorted_vision"
+  },
+  "severity_conditional_mappings": {
+    "fever": {
+      "by_severity": {
+        "severe": "high_fever",
+        "mild": "mild_fever"
+      },
+      "clarification_candidates": ["high_fever", "mild_fever"],
+      "clarification_prompt": "Clarify whether fever is mild/low-grade ('mild_fever') or high/severe ('high_fever')."
+    }
+  },
+  "ambiguous_clarifications": {
+    "weakness": {
+      "clarification_candidates": [
+        "fatigue",
+        "muscle_weakness",
+        "weakness_in_limbs",
+        "weakness_of_one_body_side"
+      ],
+      "clarification_prompt": "Clarify type/location of weakness (general fatigue, muscle weakness, limb weakness, or one-sided weakness)."
+    },
+    "swelling": {
+      "clarification_candidates": [
+        "swollen_legs",
+        "swollen_extremeties",
+        "swelling_joints",
+        "swelling_of_stomach"
+      ],
+      "clarification_prompt": "Clarify location of swelling (legs, extremities, joints, or stomach)."
+    },
+    "frequent_urination": {
+      "clarification_candidates": [
+        "polyuria",
+        "continuous_feel_of_urine"
+      ],
+      "clarification_prompt": "Clarify whether urination involves high volume (polyuria) or continuous urge."
+    }
+  }
+}
